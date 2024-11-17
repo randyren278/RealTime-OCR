@@ -10,19 +10,13 @@ import cv2
 import numpy
 import pytesseract
 
+
 import Linguist
 
 
 def tesseract_location(root):
-    """
-    Sets the tesseract cmd root and exits is the root is not set correctly
-
-    Tesseract needs a pointer to exec program included in the install.
-    Example: User/Documents/tesseract/4.1.1/bin/tesseract
-    See tesseract documentation for help.
-    """
     try:
-        pytesseract.pytesseract.tesseract_cmd = root
+        pytesseract.pytesseract.tesseract_cmd = '/opt/homebrew/bin/tesseract'
     except FileNotFoundError:
         print("Please double check the Tesseract file directory or ensure it's installed.")
         sys.exit(1)
@@ -201,7 +195,7 @@ class OCR:
 
                 # # # CUSTOM FRAME PRE-PROCESSING GOES HERE # # #
                 frame = cv2.cvtColor(frame, cv2.COLOR_RGB2GRAY)
-                # frame = cv2.adaptiveThreshold(frame, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
+                #frame = cv2.adaptiveThreshold(frame, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
                 # # # # # # # # # # # # # # # # # # # #
 
                 frame = frame[self.crop_height:(self.height - self.crop_height),
@@ -331,7 +325,8 @@ def put_ocr_boxes(boxes, frame, height, crop_width=0, crop_height=0, view_mode=1
                         text = text + ' ' + word
 
         if text.isascii():  # CV2 is only able to display ascii chars at the moment
-            cv2.putText(frame, text, (5, height - 5), cv2.FONT_HERSHEY_DUPLEX, 1, (200, 200, 200))
+            cv2.putText(frame, text, (5, height - 5), cv2.FONT_HERSHEY_DUPLEX, 1, (200, 200, 200), thickness=4)
+
 
     return frame, text
 
