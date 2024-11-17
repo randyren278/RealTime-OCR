@@ -408,7 +408,7 @@ def ocr_stream(crop: list[int, int], source: int = 0, view_mode: int = 1, langua
     img_wi, img_hi = video_stream.get_video_dimensions()
 
     if crop is None:  # Setting crop area and confirming valid parameters
-        cropx, cropy = (200, 200)  # Default crop if none is specified
+        cropx, cropy = (100, 100)  # Default crop if none is specified
     else:
         cropx, cropy = crop[0], crop[1]
         if cropx > img_wi or cropy > img_hi or cropx < 0 or cropy < 0:
