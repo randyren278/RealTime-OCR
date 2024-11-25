@@ -1,10 +1,10 @@
 import argparse
 
-from CLIP_processor import clip_stream
+from trocr_processor import trocr_stream
 
 def main():
     """
-    Handles command line arguments and begins the real-time CLIP object detection by calling clip_stream().
+    Handles command line arguments and begins the real-time OCR using TrOCR by calling trocr_stream().
     """
     parser = argparse.ArgumentParser()
 
@@ -13,8 +13,8 @@ def main():
 
     args = parser.parse_args()
 
-    # Start the CLIP object detection stream
-    clip_stream(source=args.src)
+    # Start the OCR stream
+    trocr_stream(source=args.src)
 
 if __name__ == '__main__':
     main()
